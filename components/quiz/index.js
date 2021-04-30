@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Router from 'next/router';
 const bg = 'bg-gray-300';
 const txt = 'text-black';
 let el = 0;
 let link = '';
-// Usage
+let correct = 0;
+
+// Add sound to page
+import useSound from 'use-sound';
+const computerSfx = '/computer-startup-long.mp3';
+
 export default function App(props) {
+	// Sound effect
+	const [play] = useSound(computerSfx);
+	// Enable globally
 	link = props.link;
+	correct = props.correct;
 	// Call the hook for each key that I'd like to monitor
 	const arrowUp = useKeyPress('ArrowUp');
 	const arrowDown = useKeyPress('ArrowDown');
@@ -59,11 +68,14 @@ export default function App(props) {
 			c4.classList.remove(txt);
 		}
 		// Only click with correct awnser
-		if ((Enter || arrowRight) && props.correct == selected) el.click();
+		if (Enter || arrowRight) {
+			el.click();
+		}
 	});
 
 	return (
 		<div className="text-2xl md:text-xl tracking-tighter">
+			<div className="sound hidden" onClick={play}></div>
 			<ul>
 				<Option id="1" op={props.op1} />
 				<Option id="2" op={props.op2} />
@@ -73,13 +85,20 @@ export default function App(props) {
 		</div>
 	);
 }
+// Options Available
 const Option = ({ id, op }) => {
+	const [clicked, setClicked] = useState(0);
+	useEffect(() => {
+		if (clicked == correct) {
+			const sound = document.querySelector('.sound');
+			sound.click();
+			Router.push(link);
+		}
+	});
 	return (
-		<Link href={link}>
-			<a>
-				<li className={`choice-${id} hide-cursor mb-1 p-2 sm:mb-0`}>{`> ${op}`}</li>
-			</a>
-		</Link>
+		<li onClick={() => setClicked(id)} className={`choice-${id} hide-cursor mb-1 p-2 sm:mb-0`}>
+			{`> ${op}`}
+		</li>
 	);
 };
 // Hook

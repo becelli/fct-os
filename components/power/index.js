@@ -1,6 +1,6 @@
 import { FaPowerOff } from 'react-icons/fa';
 import useSound from 'use-sound';
-const computerStartUp = '/computer-startup.ogg';
+const computerStartUp = '/computer-startup-24.mp3';
 import Link from 'next/link';
 export default function PowerButton() {
 	const [play] = useSound(computerStartUp);
