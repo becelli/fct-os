@@ -1,6 +1,6 @@
 import { FaPowerOff } from 'react-icons/fa';
 import useSound from 'use-sound';
-const computerStartUp = '/computer-startup.mp3';
+const computerStartUp = '/computer-startup.ogg';
 import Link from 'next/link';
 export default function PowerButton() {
 	const [play] = useSound(computerStartUp);
@@ -9,7 +9,7 @@ export default function PowerButton() {
 			<div
 				onClick={play}
 				className="cursor-pointer m-auto sm:opacity-10 sm:hover:opacity-100 transition duration-400 text-9xl">
-				<Link href="/start">
+				<Link href="/poweron">
 					<a>
 						<FaPowerOff />
 					</a>
