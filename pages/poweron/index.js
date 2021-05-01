@@ -7,7 +7,7 @@ export default function PowerOn() {
 	useEffect(() => {
 		setTimeout(() => {
 			setShow(true);
-		}, 8900);
+		}, 9000);
 	}, [show]);
 
 	if (!show) return null;
@@ -15,10 +15,10 @@ export default function PowerOn() {
 	return (
 		<main className="h-screen w-screen hide-cursor">
 			<Quiz
-				op1="Carregar Sistema Operacional"
-				op2="Realizar o Setup"
-				op3="Alterar ordem de Boot"
-				op4="Ligar para o técnico"
+				op1="Carregar o kernel e o sistema Operacional"
+				op2="Realizar o setup e rotina de testes"
+				op3="Alterar ordem de boot e ativar o mouse"
+				op4="Ligar para o técnico da FCT"
 				correct="2"
 				link="/setup"
 			/>
